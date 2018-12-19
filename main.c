@@ -39,6 +39,7 @@ void ft_free_tab(char **tab)
 
 void ft_parse_piece(t_info *t, t_piece *p)
 {
+	ft_putstr_fd("parse piece\n", 2);
 	char *line;
 	int i = 0;
 	char **tmp;
@@ -58,11 +59,13 @@ void ft_parse_piece(t_info *t, t_piece *p)
 		free(line);
 		i++;
 	}
+	ft_putstr_fd("parse piece fin\n", 2);
 	ft_print_infos(t, p);
 }
 
 void ft_parse_map(t_info *t)
 {
+	ft_putstr_fd("parse map\n", 2);
 	char *line;
 	int i = 0;
 	char **tmp;
@@ -80,17 +83,20 @@ void ft_parse_map(t_info *t)
 		ft_free_tab(tmp);
 		i++;
 	}
+	ft_putstr_fd("parse map fin\n", 2);
 }
 
 
 void ft_infos(t_info *t)
 {
+	ft_putstr_fd("info\n", 2);
 	char *line;
 	char **tmp;
 
 	get_next_line(0, &line);
 	t->num_player = ft_atoi(line + 10);
-	t->letter = (t->num_player == 1) ? 'O' : 'X';
+	t->my_letter = (t->num_player == 1) ? 'O' : 'X';
+	t->adv_letter = (t->my_letter == 'X') ? 'O' : 'X';
 	free(line);
 	get_next_line(0, &line);
 	tmp = ft_strsplit(line, ' ');
@@ -98,18 +104,21 @@ void ft_infos(t_info *t)
 	t->width_map = ft_atoi(tmp[2]);
 	ft_free_tab(tmp);
 	free(line);
-//	ft_putnbr_fd(t->num_player, 2);
-//	ft_putnbr_fd(t->height_map, 2);
-//	ft_putnbr_fd(t->width_map, 2);
+	ft_putnbr_fd(t->num_player, 2);
+	ft_putnbr_fd(t->height_map, 2);
+	ft_putnbr_fd(t->width_map, 2);
+	ft_putstr_fd("info fin\n", 2);
 }
 
-int main()
+int main(int ac, char **av)
 {
 	t_info t;
 	t_piece p;
 
+	ft_putnbr_fd(3, 1);
 	ft_infos(&t);
 	ft_parse_map(&t);
+	ft_init_heat_map(&t);
 	ft_parse_piece(&t, &p);
 //	while(get_next_line(0, &line))
 //	{
