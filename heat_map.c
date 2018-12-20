@@ -3,7 +3,7 @@
 
 void ft_put_next(t_info *t, int next, int i, int j)
 {
-	ft_putstr_fd("put next\n", 2);
+//	ft_putstr_fd("put next\n", 2);
 	if (i - 1 >= 0)
 	{
 		if (t->heat_map[i - 1][j] == 0)
@@ -24,12 +24,12 @@ void ft_put_next(t_info *t, int next, int i, int j)
 		if (t->heat_map[i][j + 1] == 0)
 			t->heat_map[i][j + 1] = next;
 	}
-	ft_putstr_fd("put next fin\n", 2);
+//	ft_putstr_fd("put next fin\n", 2);
 }
 
 int ft_count_empty(t_info *t)
 {
-	ft_putstr_fd("count empty\n", 2);
+//	ft_putstr_fd("count empty\n", 2);
 	int i = 0;
 	int j = 0;
 	int ret = 0;
@@ -41,15 +41,15 @@ int ft_count_empty(t_info *t)
 		{
 			if (t->heat_map[i][j] == 0)
 				ret++;
-			ft_putnbr_fd(t->heat_map[i][j], 2);
-			ft_putchar_fd(' ', 2);
+//			ft_putnbr_fd(t->heat_map[i][j], 2);
+//			ft_putchar_fd(' ', 2);
 			j++;
 		}
-		ft_putchar_fd('\n', 2);
+//		ft_putchar_fd('\n', 2);
 		i++;
 	}
 //	sleep(1);
-	ft_putstr_fd("count empty fin\n", 2);
+//	ft_putstr_fd("count empty fin\n", 2);
 //	ft_putnbr_fd(ret, 2);
 	return (ret);
 }
@@ -57,8 +57,8 @@ int ft_count_empty(t_info *t)
 void ft_zeros_to_max(t_info *t)
 {
 	int i = 0;
-	int j = 0;
-
+	int j;
+//ft_putnbr(t->chaleur_max);
 	while(i < t->height_map)
 	{
 		j = 0;
@@ -66,10 +66,18 @@ void ft_zeros_to_max(t_info *t)
 		{
 			if (t->heat_map[i][j] == 0)
 				t->heat_map[i][j] = t->chaleur_max;
+//			ft_putnbr_fd(i, 2);
+//			ft_putnbr_fd(j, 2);
+//			ft_putnbr_fd(t->heat_map[i][j], 2);
 			j++;
+			
+//			ft_putchar_fd(' ', 2);
 		}
+//		ft_putchar_fd('\n', 2);
 		i++;
 	}
+//	ft_putnbr(t->chaleur_max);
+//	sleep(3);
 }
 
 void ft_heat(t_info *t)
@@ -84,7 +92,7 @@ void ft_heat(t_info *t)
 	while(zero != ft_count_empty(t))
 	{
 		zero = ft_count_empty(t);
-//		ft_putstr_fd("ici", 2);
+		ft_putnbr_fd(zero, 2);
 		i = 0;
 		while(i < t->height_map)
 		{
@@ -105,7 +113,9 @@ void ft_heat(t_info *t)
 //		ft_putnbr_fd(chaleur, 2);
 //		ft_putnbr_fd(next, 2);
 	}
-	t->chaleur_max = next;
+	t->chaleur_max = chaleur - 1;
+//	ft_putstr_fd("t->chaleur_max=", 2);
+//	ft_putnbr_fd(t->chaleur_max, 2);
 	ft_zeros_to_max(t);
 	ft_putstr_fd("heat fin\n", 2);
 }

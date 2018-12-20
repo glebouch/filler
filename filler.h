@@ -15,19 +15,23 @@ typedef struct	s_info
 	char my_letter;
 	char adv_letter;
 	int chaleur_max;
+	int heat_min_global;
+	int heat_min_piece;
 	char **map;
 	int **pos;
 	int **heat_map;
-}				t_info;
-
-typedef struct	s_piece
-{
+	int i_ret;
+	int j_ret;
+	int nbr_pts;
 	int width_piece;
 	int height_piece;
 	char **piece;
 	int **tab_piece;
-}				t_piece;
+}				t_info;
+
 
 void	ft_init_heat_map(t_info *t);
+int ft_heat_of_point(t_info *t);
+void ft_free_all(t_info *t);
 
 #endif
