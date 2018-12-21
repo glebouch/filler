@@ -1,5 +1,22 @@
 #include "filler.h"
+void ft_put_tab_piece(t_info *t)
+{
+	int i = 0;
+	int j = 0;
 
+	while (i < t->nbr_pts)
+	{
+		j = 0;
+		while( j < 2)
+		{
+			ft_putnbr_fd(t->tab_piece[i][j], 2);
+			ft_putchar_fd(' ', 2);
+			j++;
+		}
+		ft_putchar_fd('\n', 2);
+		i++;
+	}
+}
 void ft_fill_tab_piece(t_info *t)
 {
 	int i = 0;
@@ -47,6 +64,7 @@ int ft_init_tab_piece(t_info *t)
 	while(i < t->nbr_pts)
 		t->tab_piece[i++] = (int *)malloc(sizeof(int) * 2);
 	ft_fill_tab_piece(t);
+//	ft_put_tab_piece(t);
 
 	ft_putstr_fd("ft_init_tab_piece fin\n", 2);
 	return(t->nbr_pts);
@@ -108,6 +126,10 @@ void ft_set_ret(t_info *t, int y, int x)
 		t->heat_min_global = t->heat_min_piece;
 		t->i_ret = y;
 		t->j_ret = x;
+		ft_putchar_fd(' ', 2);
+		ft_putnbr_fd(t->i_ret, 2);
+		ft_putchar_fd(' ', 2);
+		ft_putnbr_fd(t->j_ret, 2);
 	}
 }
 
@@ -152,8 +174,18 @@ int ft_try_pos_piece(t_info *t, int y, int x)
 			ft_putnbr_fd(p_is_free, 2);
 			if (p_is_free)
 			{
-				t->heat_min_piece = ft_set_heat_min_piece(t, y + t->tab_piece[n][0] - t->tab_piece[i][0],
-					x + t->tab_piece[n][1] - t->tab_piece[i][1]);
+				t->heat_min_piece = ft_set_heat_min_piece(t, y - t->tab_piece[n][0] + t->tab_piece[i][0],
+					x - t->tab_piece[n][1] + t->tab_piece[i][1]);
+				ft_putnbr_fd(y, 2);
+				ft_putchar_fd(' ', 2);
+				ft_putnbr_fd(x, 2);
+				ft_putchar_fd(' ', 2);
+				ft_putnbr_fd(y - t->tab_piece[n][0] + t->tab_piece[i][0], 2);
+				ft_putchar_fd(' ', 2);
+				ft_putnbr_fd(x - t->tab_piece[n][1] + t->tab_piece[i][1], 2);
+				ft_putchar_fd(' ', 2);
+				ft_putnbr_fd(t->heat_map[y - t->tab_piece[n][0] + t->tab_piece[i][0]][x - t->tab_piece[n][1] + t->tab_piece[i][1]], 2);
+				ft_putchar_fd(' ', 2);
 				ft_putnbr_fd(t->heat_min_piece, 2);
 			}
 			ft_putstr_fd("la\n", 2);
@@ -162,7 +194,24 @@ int ft_try_pos_piece(t_info *t, int y, int x)
 			i++;
 		}
 		if (p_is_free)
+		{
+			ft_putchar_fd(' ', 2);
+			ft_putnbr_fd(t->tab_piece[n][0], 2);
+			ft_putchar_fd(' ', 2);
+			ft_putnbr_fd(t->tab_piece[n][1], 2);
+			ft_putchar_fd(' ', 2);
+			ft_putnbr_fd(y, 2);
+			ft_putchar_fd(' ', 2);
+			ft_putnbr_fd(x, 2);
+			ft_putchar_fd(' ', 2);
+			ft_putnbr_fd(t->heat_min_global, 2);
+			ft_putchar_fd(' ', 2);
+			ft_putnbr_fd(t->heat_min_piece, 2);
+			ft_putchar_fd('\n', 2);
+			ft_put_heat_map(t);
+
 			ft_set_ret(t, y - t->tab_piece[n][0], x - t->tab_piece[n][1]);
+		}
 		n++;
 	}
 	ft_putstr_fd("ft_try_pos_piece fin\n", 2);
