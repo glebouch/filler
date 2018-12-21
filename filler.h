@@ -34,5 +34,6 @@ void	ft_init_heat_map(t_info *t);
 int ft_heat_of_point(t_info *t);
 void ft_free_all(t_info *t);
 void ft_put_heat_map(t_info *t);
+int ft_init_tab_piece(t_info *t);
 
 #endif
