@@ -1,4 +1,4 @@
-
+ 
 #include "filler.h"
 
 void ft_print_infos(t_info *t)
@@ -10,7 +10,9 @@ void ft_print_infos(t_info *t)
 		ft_putendl_fd(t->map[i++], 2);
 	while (j < t->height_piece)
 		ft_putendl_fd(t->piece[j++], 2);
+	ft_put_tab_piece(t);
 	ft_put_heat_map(t);
+//	sleep(1);
 }
 
 int		ft_size(uintmax_t n)
@@ -62,7 +64,7 @@ void ft_free_all(t_info *t)
 //	ft_print_infos(t);
 	ft_free_tab_char(t->map);
 //	ft_putstr_fd("free2\n", 2);
-	 ft_free_tab_char(t->piece);
+	ft_free_tab_char(t->piece);
 //	ft_putstr_fd("free3\n", 2);
 	ft_free_tab_int(t->tab_piece, t->nbr_pts);
 //	ft_putstr_fd("free4\n", 2);
@@ -159,20 +161,25 @@ int main(int ac, char **av)
 	ft_infos(&t);
 	while(1)
 	{
-	ft_parse_map(&t);
-	ft_init_heat_map(&t);
-	ft_parse_piece(&t);
-	ft_heat_of_point(&t);
+		t.i_ret = 0;
+		t.j_ret = 0;
+		ft_parse_map(&t);
+		ft_init_heat_map(&t);
+		ft_parse_piece(&t);
+		ft_heat_of_point(&t);
 //	while(get_next_line(0, &line))
 //	{
 //		ft_putendl_fd(line, 2);
 //	}
 //	ft_putstr_fd(line, 2);
 
-	ft_putnbr_fd(t.i_ret, 1);
-	ft_putchar(' ');
-	ft_putnbr_fd(t.j_ret, 1);
-	ft_putchar('\n');
+		ft_putnbr_fd(t.i_ret, 1);
+		ft_putchar(' ');
+		ft_putnbr_fd(t.j_ret, 1);
+		ft_putchar('\n');
+		ft_free_all(&t);
+		if(t.end)
+			return(0);
 	}
 	return (0);
 }

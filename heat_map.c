@@ -1,4 +1,4 @@
-#include "filler.h"
+ #include "filler.h"
 
 void ft_put_heat_map(t_info *t)
 {
@@ -106,7 +106,7 @@ void ft_heat(t_info *t)
 	int i = 0;
 	int j = 0;
 	int chaleur = -1;
-	int next = 1;
+	int next = 2;
 	int zero = 0;
 
 	while(zero != ft_count_empty(t))

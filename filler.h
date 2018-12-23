@@ -1,4 +1,4 @@
-#ifndef FILLER_H
+ #ifndef FILLER_H
 # define FILLER_H
 
 # include <stdio.h>
@@ -27,6 +27,7 @@ typedef struct	s_info
 	int height_piece;
 	char **piece;
 	int **tab_piece;
+	int end;
 }				t_info;
 
 
