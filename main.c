@@ -74,7 +74,7 @@ void ft_free_all(t_info *t)
 
 void ft_parse_piece(t_info *t)
 {
-	ft_putstr_fd("parse piece\n", 2);
+//	ft_putstr_fd("parse piece\n", 2);
 	char *line;
 	int i = 0;
 	char **tmp;
@@ -88,7 +88,7 @@ void ft_parse_piece(t_info *t)
 	free(line);
 	if (!(t->piece = (char **)malloc(sizeof(char *) * (t->height_piece + 1))))
 		return ;
-	while(i < t->height_piece)
+	while (i < t->height_piece)
 	{
 		get_next_line(0, &line);
 		t->piece[i] = ft_strdup(line);
@@ -97,13 +97,13 @@ void ft_parse_piece(t_info *t)
 	}
 	t->piece[i] = NULL;
 	ft_init_tab_piece(t);
-	ft_putstr_fd("parse piece fin\n", 2);
-	ft_print_infos(t);
+//	ft_putstr_fd("parse piece fin\n", 2);
+///////////////////////////////	ft_print_infos(t);
 }
 
 void ft_parse_map(t_info *t)
 {
-	ft_putstr_fd("parse map\n", 2);
+//	ft_putstr_fd("parse map\n", 2);
 	char *line;
 	int i = 0;
 	char **tmp;
@@ -119,6 +119,7 @@ void ft_parse_map(t_info *t)
 		return ;
 	i = 0;
 	get_next_line(0, &line);
+	free(line);
 //	ft_putstr_fd(line, 2);
 	while(i < t->height_map)
 	{
@@ -131,13 +132,13 @@ void ft_parse_map(t_info *t)
 		i++;
 	}
 	t->map[i] = NULL;
-	ft_putstr_fd("parse map fin\n", 2);
+//	ft_putstr_fd("parse map fin\n", 2);
 }
 
 
 void ft_infos(t_info *t)
 {
-	ft_putstr_fd("info\n", 2);
+//	ft_putstr_fd("info\n", 2);
 	char *line;
 //	char **tmp;
 
@@ -146,10 +147,10 @@ void ft_infos(t_info *t)
 	t->my_letter = (t->num_player == 1) ? 'O' : 'X';	
 	t->adv_letter = (t->my_letter == 'X') ? 'O' : 'X';
 	free(line);
-	ft_putnbr_fd(t->num_player, 2);
-	ft_putnbr_fd(t->height_map, 2);
-	ft_putnbr_fd(t->width_map, 2);
-	ft_putstr_fd("info fin\n", 2);
+//	ft_putnbr_fd(t->num_player, 2);
+//	ft_putnbr_fd(t->height_map, 2);
+//	ft_putnbr_fd(t->width_map, 2);
+//	ft_putstr_fd("info fin\n", 2);
 }
 
 int main(int ac, char **av)

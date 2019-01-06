@@ -21,7 +21,7 @@ SRC = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c \
 	  get_next_line.c ft_putnstr_fd.c ft_sizetoa.c ft_putnstr.c \
 	  ft_imaxabs.c ft_power.c ft_putll.c
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 OBJ = $(SRC:.c=.o)
 

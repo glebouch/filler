@@ -71,36 +71,36 @@ int ft_init_tab_piece(t_info *t)
 
 int ft_place_free(t_info *t, int y, int x)
 {
-	ft_putstr_fd("ft_place_free? \n", 2);
-	ft_putnbr_fd(y, 2);
-	ft_putchar_fd(' ',2);
-	ft_putnbr_fd(x, 2);
-	ft_putchar_fd(' ',2);
-	ft_putchar_fd(t->map[y][x], 2);
-	ft_putchar_fd('\n',2);
+//	ft_putstr_fd("ft_place_free? \n", 2);
+//	ft_putnbr_fd(y, 2);
+//	ft_putchar_fd(' ',2);
+//	ft_putnbr_fd(x, 2);
+//	ft_putchar_fd(' ',2);
+//	ft_putchar_fd(t->map[y][x], 2);
+//	ft_putchar_fd('\n',2);
 	if (t->map[y][x] == '.')
 		return (1);
-	ft_putstr_fd("ft_place_not free at : ", 2);
-	ft_putnbr_fd(y, 2);
-	ft_putchar_fd(' ',2);
-	ft_putnbr_fd(x, 2);
-	ft_putchar_fd('\n',2);
+//	ft_putstr_fd("ft_place_not free at : ", 2);
+//	ft_putnbr_fd(y, 2);
+//	ft_putchar_fd(' ',2);
+//	ft_putnbr_fd(x, 2);
+//	ft_putchar_fd('\n',2);
 	return (0);
 }
 
 int ft_piece_can_fit(t_info *t, int n, int y, int x)
 {
-	ft_putstr_fd("ft_piece_can_fit?\n", 2);
+//	ft_putstr_fd("ft_piece_can_fit?\n", 2);
 	if((y - t->tab_piece[n][0] >= 0 && y + t->height_piece - t->tab_piece[n][0] <= t->height_map) && \
 		(x - t->tab_piece[n][1] >= 0 && x + t->width_piece - t->tab_piece[n][1] <= t->width_map))
 		return (1);
-	ft_putstr_fd("ft_piece_cantttttt_fit\n", 2);
+//	ft_putstr_fd("ft_piece_cantttttt_fit\n", 2);
 	return (0);
 }
 
 int ft_set_heat_min_piece(t_info *t, int y, int x)
 {
-	ft_putstr_fd("ft_set_heat_min_piece\n", 2);
+//	ft_putstr_fd("ft_set_heat_min_piece\n", 2);
 	if (t->heat_map[y][x] > 0 && (!t->heat_min_piece || t->heat_min_piece > t->heat_map[y][x]))
 		return (t->heat_map[y][x]);
 	return (t->heat_min_piece);
@@ -108,24 +108,24 @@ int ft_set_heat_min_piece(t_info *t, int y, int x)
 
 void ft_set_ret(t_info *t, int y, int x)
 {
-	ft_putstr_fd("ft_set_ret\n", 2);
+//	ft_putstr_fd("ft_set_ret\n", 2);
 	if (!t->heat_min_global || t->heat_min_global > t->heat_min_piece)
 	{
 		if(t->heat_min_piece > 0)
 		t->heat_min_global = t->heat_min_piece;
 		t->i_ret = y;
 		t->j_ret = x;
-		ft_putchar_fd(' ', 2);
-		ft_putnbr_fd(t->i_ret, 2);
-		ft_putchar_fd(' ', 2);
-		ft_putnbr_fd(t->j_ret, 2);
-		ft_putchar_fd('\n',2);
+//		ft_putchar_fd(' ', 2);
+//		ft_putnbr_fd(t->i_ret, 2);
+//		ft_putchar_fd(' ', 2);
+//		ft_putnbr_fd(t->j_ret, 2);
+//		ft_putchar_fd('\n',2);
 	}
 }
 
 int ft_try_pos_piece(t_info *t, int y, int x)
 {
-	ft_putstr_fd("ft_try_pos_piece\n", 2);
+//	ft_putstr_fd("ft_try_pos_piece\n", 2);
 	int p_is_free = 1;
 	int n = 0;
 	int i = 0;
@@ -134,9 +134,9 @@ int ft_try_pos_piece(t_info *t, int y, int x)
 	
 	while (n < t->nbr_pts)
 	{
-		ft_putstr_fd("pt de depart de la piece: no", 2);
-		ft_putnbr_fd(n, 2);
-		ft_putchar_fd('\n', 2);
+//		ft_putstr_fd("pt de depart de la piece: no", 2);
+//		ft_putnbr_fd(n, 2);
+//		ft_putchar_fd('\n', 2);
 		i = 0;
 		t->heat_min_piece = 0;
 		if (ft_piece_can_fit(t, n, y, x))
@@ -144,9 +144,9 @@ int ft_try_pos_piece(t_info *t, int y, int x)
 			p_is_free = 1;
 			while (i < t->nbr_pts && p_is_free)
 			{
-				ft_putstr_fd("pt de la piece no", 2);
-				ft_putnbr_fd(i, 2);
-				ft_putchar_fd('\n', 2);
+//				ft_putstr_fd("pt de la piece no", 2);
+//				ft_putnbr_fd(i, 2);
+//				ft_putchar_fd('\n', 2);
 //				p_is_free = 1;
 				if (i != n)
 				{
@@ -161,9 +161,9 @@ int ft_try_pos_piece(t_info *t, int y, int x)
 				{
 					t->heat_min_piece = ft_set_heat_min_piece(t, y - t->tab_piece[n][0] + t->tab_piece[i][0],
 						x - t->tab_piece[n][1] + t->tab_piece[i][1]);
-					ft_putstr_fd("heat_min_piece = ", 2);
-					ft_putnbr_fd(t->heat_min_piece, 2);
-					ft_putchar_fd('\n',2);
+//					ft_putstr_fd("heat_min_piece = ", 2);
+//					ft_putnbr_fd(t->heat_min_piece, 2);
+//					ft_putchar_fd('\n',2);
 				}
 				if (!p_is_free)
 				{
@@ -173,8 +173,10 @@ int ft_try_pos_piece(t_info *t, int y, int x)
 				i++;
 			}	
 			if (p_is_free)
-			{	ft_set_ret(t, y - t->tab_piece[n][0], x - t->tab_piece[n][1]);
-				ft_putnbr_fd(t->heat_min_global, 2);}
+			{	
+				ft_set_ret(t, y - t->tab_piece[n][0], x - t->tab_piece[n][1]);
+//				ft_putnbr_fd(t->heat_min_global, 2);
+			}
 		}
 		n++;
 	}
@@ -221,14 +223,14 @@ int ft_heat_of_point(t_info *t)
 //				ft_putnbr_fd(ft_check_if_chaleur_is_around(t, i, j, chaleur), 2);
 				if (t->map[i][j] == t->my_letter && ft_check_if_chaleur_is_around(t, i, j, chaleur))
 				{
-					ft_putstr_fd("chaleur, pt de depart :", 2);
-					ft_putnbr_fd(chaleur, 2);
-					ft_putchar_fd(' ', 2);
-					ft_putnbr_fd(i, 2);
-					ft_putchar_fd(' ', 2);
-					ft_putnbr_fd(j, 2);
-					ft_putchar_fd(' ', 2);
-					ft_putstr_fd("lets go\n", 2);
+//					ft_putstr_fd("chaleur, pt de depart :", 2);
+//					ft_putnbr_fd(chaleur, 2);
+//					ft_putchar_fd(' ', 2);
+//					ft_putnbr_fd(i, 2);
+//					ft_putchar_fd(' ', 2);
+//					ft_putnbr_fd(j, 2);
+//					ft_putchar_fd(' ', 2);
+//					ft_putstr_fd("lets go\n", 2);
 //					ft_putnbr_fd(t->map[i][j], 2);
 					if (ft_try_pos_piece(t, i, j))
 						return(0);
@@ -240,7 +242,7 @@ int ft_heat_of_point(t_info *t)
 		}
 		chaleur++;
 	}
-	ft_putstr_fd("heat point fin\n", 2);
+//	ft_putstr_fd("heat point fin\n", 2);
 	t->end = 1;
 //	ft_free_all(t);
 	return(0);

@@ -102,7 +102,7 @@ void ft_zeros_to_max(t_info *t)
 
 void ft_heat(t_info *t)
 {
-	ft_putstr_fd("heat\n", 2);
+//	ft_putstr_fd("heat\n", 2);
 	int i = 0;
 	int j = 0;
 	int chaleur = -1;
@@ -112,7 +112,7 @@ void ft_heat(t_info *t)
 	while(zero != ft_count_empty(t))
 	{
 		zero = ft_count_empty(t);
-		ft_putnbr_fd(zero, 2);
+//		ft_putnbr_fd(zero, 2);
 		i = 0;
 		while(i < t->height_map)
 		{
@@ -137,13 +137,13 @@ void ft_heat(t_info *t)
 //	ft_putstr_fd("t->chaleur_max=", 2);
 //	ft_putnbr_fd(t->chaleur_max, 2);
 	ft_zeros_to_max(t);
-	ft_putstr_fd("heat fin\n", 2);
+//	ft_putstr_fd("heat fin\n", 2);
 }
 
 
 void ft_init_heat_map(t_info *t)
 {
-	ft_putstr_fd("init heat\n", 2);
+//	ft_putstr_fd("init heat\n", 2);
 	int i = 0;
 	int j = 0;
 
@@ -171,7 +171,7 @@ void ft_init_heat_map(t_info *t)
 		}
 		i++;
 	}
-	ft_putstr_fd("init heat fin\n", 2);
+//	ft_putstr_fd("init heat fin\n", 2);
 	ft_heat(t);
 }
 
