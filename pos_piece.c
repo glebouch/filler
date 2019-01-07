@@ -12,26 +12,6 @@
 
 #include "filler.h"
 
-/*
-void ft_put_tab_piece(t_info *t)
-{
-	int i = 0;
-	int j = 0;
-
-	while (i < t->nbr_pts)
-	{
-		j = 0;
-		while( j < 2)
-		{
-			ft_putnbr_fd(t->tab_piece[i][j], 2);
-			ft_putchar_fd(' ', 2);
-			j++;
-		}
-		ft_putchar_fd('\n', 2);
-		i++;
-	}
-}*/
-
 void	ft_fill_tab_piece(t_info *t)
 {
 	int i;

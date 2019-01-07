@@ -12,27 +12,6 @@
 
 #include "filler.h"
 
-/*
-void ft_put_heat_map(t_info *t)
-{
-	int i = 0;
-	int j = 0;
-
-	while (i <t->height_map)
-	{
-		j = 0;
-		while( j < t->width_map)
-		{
-			ft_putnbr_fd(t->heat_map[i][j], 2);
-			ft_putchar_fd(' ', 2);
-			j++;
-		}
-		ft_putchar_fd('\n', 2);
-		i++;
-	}
-}
-*/
-
 void	ft_put_next(t_info *t, int next, int i, int j)
 {
 	if (i - 1 >= 0)
@@ -102,8 +81,6 @@ void	ft_zeros_to_max(t_info *t)
 
 void	ft_heat(t_info *t)
 {
-//	int i;
-//	int j;
 	int chaleur;
 	int next;
 	int zero;

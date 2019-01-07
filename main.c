@@ -12,35 +12,6 @@
 
 #include "filler.h"
 
-/*
-void ft_print_infos(t_info *t)
-{
-	int i = 0;
-	int j = 0;
-
-	while (i < t->height_map)
-		ft_putendl_fd(t->map[i++], 2);
-	while (j < t->height_piece)
-		ft_putendl_fd(t->piece[j++], 2);
-	ft_put_tab_piece(t);
-	ft_put_heat_map(t);
-//	sleep(1);
-}
-
-int		ft_size(uintmax_t n)
-{
-	int	size;
-
-	size = 1;
-	while (n / 10)
-	{
-		size++;
-		n = n / 10;
-	}
-	return (size);
-}
-*/
-
 void	ft_parse_piece(t_info *t)
 {
 	char	*line;
