@@ -4,9 +4,9 @@ SRC = main.c heat_map.c pos_piece.c frees.c utils_pos_piece.c utils_heat_map.c
 
 LIB = ./libft/libft.a
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 
-CC = clang
+CC = gcc
 
 all : $(NAME)
 

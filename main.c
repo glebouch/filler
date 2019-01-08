@@ -12,70 +12,153 @@
 
 #include "filler.h"
 
-void	ft_parse_piece(t_info *t)
+int		ft_verif_line_piece(t_info *t, char *line)
 {
-	char	*line;
-	int		i;
-	char	**tmp;
+	ft_putstr_fd("line piece\n", 2);
+	int j;
+
+	j = 0;
+	while(line[j] && (line[j] == '.' || line[j] == '*'))
+		j++;
+	if (j == t->width_piece)
+		return (1);
+	ft_free_tab_char(t->map);
+	ft_free_tab_char(t->piece);
+	return(0);
+}
+
+int		ft_parse_piece2(t_info *t)
+{
+	int i;
+	char *line;
 
 	i = 0;
-	get_next_line(0, &line);
-	tmp = ft_strsplit(line, ' ');
-	t->height_piece = ft_atoi(tmp[1]);
-	t->width_piece = ft_atoi(tmp[2]);
-	ft_free_tab_char(tmp);
-	free(line);
-	if (!(t->piece = (char **)malloc(sizeof(char *) * (t->height_piece + 1))))
-		return ;
 	while (i < t->height_piece)
 	{
 		get_next_line(0, &line);
+		if(!ft_verif_line_piece(t, line))
+		{
+			free(line);
+			return(0);
+		}
 		t->piece[i] = ft_strdup(line);
 		free(line);
 		i++;
 	}
 	t->piece[i] = NULL;
-	ft_init_tab_piece(t);
+	return(1);
 }
 
-void	ft_parse_map(t_info *t)
+int		ft_parse_piece(t_info *t)
 {
 	char	*line;
-	int		i;
 	char	**tmp;
 
-	i = 0;
 	get_next_line(0, &line);
 	tmp = ft_strsplit(line, ' ');
-	t->height_map = ft_atoi(tmp[1]);
-	t->width_map = ft_atoi(tmp[2]);
+	t->height_piece = (tmp[1]) ? ft_atoi(tmp[1]) : 0;
+	t->width_piece = (tmp[2]) ? ft_atoi(tmp[2]) : 0;
 	ft_free_tab_char(tmp);
 	free(line);
-	if (!(t->map = (char **)malloc(sizeof(char *) * (t->height_map + 1))))
-		return ;
-	get_next_line(0, &line);
-	free(line);
+	if (!t->height_piece || !t->width_piece)
+		return (0);
+	if (!(t->piece = (char **)malloc(sizeof(char *) * (t->height_piece + 1))))
+		return (0);
+	if(!ft_parse_piece2(t))
+	{
+		ft_free_tab_char(t->map);
+		ft_free_tab_char(t->piece);
+		ft_putstr_fd("error parse piece\n", 2);
+		return(0);
+	}
+	ft_init_tab_piece(t);
+	return(1);
+}
+
+int		ft_verif_line_map(t_info *t, char *tmp1, char *tmp2, int i)
+{
+	ft_putstr_fd("line map\n", 2);
+	int j;
+
+	j = 0;
+	if (ft_atoi(tmp1) == i)
+	{
+		while (tmp2[j] && (tmp2[j] == '.' || tmp2[j] == 'O' || tmp2[j] == 'X'))
+			j++;
+		if (j == t->width_map)
+			return(1);
+	}
+	ft_free_tab_char(t->map);
+	return (0);
+}
+
+int		ft_parse_map2(t_info *t)
+{
+	int i;
+	char *line;
+	char **tmp;
+
+	i = 0;
 	while (i < t->height_map)
 	{
 		get_next_line(0, &line);
 		tmp = ft_strsplit(line, ' ');
+		if (!ft_verif_line_map(t, tmp[0], tmp[1], i))
+		{
+			ft_free_tab_char(tmp);
+			free(line);
+			return(0);
+		}
 		t->map[i] = ft_strdup(tmp[1]);
 		free(line);
 		ft_free_tab_char(tmp);
 		i++;
 	}
 	t->map[i] = NULL;
+	return(1);
 }
 
-void	ft_infos(t_info *t)
+int		ft_parse_map(t_info *t)
+{
+	char	*line;
+	char	**tmp;
+
+	get_next_line(0, &line);
+	tmp = ft_strsplit(line, ' ');
+	t->height_map = (tmp[1]) ? ft_atoi(tmp[1]) : 0;
+	t->width_map = (tmp[2]) ? ft_atoi(tmp[2]) : 0;
+	ft_free_tab_char(tmp);
+	free(line);
+	if (!(t->map = (char **)malloc(sizeof(char *) * (t->height_map + 1))))
+	{
+		ft_putstr_fd("error malloc\n", 2);
+		return (0);
+	}
+	get_next_line(0, &line);
+	free(line);
+	if (!ft_parse_map2(t))
+	{
+		ft_putstr_fd("error parse map\n", 2);
+		return(0);
+	}
+	return(1);
+}
+
+int		ft_infos(t_info *t)
 {
 	char	*line;
 
 	get_next_line(0, &line);
-	t->num_player = ft_atoi(line + 10);
+	t->num_player = (line[10]) ? ft_atoi(line + 10) : 0;
 	t->my_letter = (t->num_player == 1) ? 'O' : 'X';
 	t->adv_letter = (t->my_letter == 'X') ? 'O' : 'X';
 	free(line);
+	if (!t->num_player)
+	{
+		ft_putstr_fd("tamere", 2);
+		return (0);
+	}
+	return (1);
 }
 
 int		main(void)
@@ -83,14 +166,18 @@ int		main(void)
 	t_info t;
 
 	ft_bzero((void *)&t, sizeof(t));
-	ft_infos(&t);
+	if (!ft_infos(&t))
+		return(0);
 	while (1)
 	{
 		t.i_ret = 0;
 		t.j_ret = 0;
-		ft_parse_map(&t);
+		if(!ft_parse_map(&t) || !ft_parse_piece(&t))
+		{
+			ft_putstr_fd("tagrandmere", 2);
+			return (0);
+		}
 		ft_heat(&t);
-		ft_parse_piece(&t);
 		t.end = ft_heat_of_point(&t);
 		ft_putnbr_fd(t.i_ret, 1);
 		ft_putchar(' ');
