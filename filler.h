@@ -65,5 +65,7 @@ void			ft_put_heat_map(t_info *t);
 int				ft_init_tab_piece(t_info *t);
 void			ft_put_tab_piece(t_info *t);
 void			ft_free_tab_char(char **tab);
+int				ft_parse_piece2(t_info *t);
+int				ft_parse_map2(t_info *t);
 
 #endif

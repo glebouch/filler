@@ -1,6 +1,6 @@
 NAME = glebouch.filler
 
-SRC = main.c heat_map.c pos_piece.c frees.c utils_pos_piece.c utils_heat_map.c
+SRC = main.c heat_map.c pos_piece.c frees.c utils_pos_piece.c utils_heat_map.c parsing.c
 
 LIB = ./libft/libft.a
 
