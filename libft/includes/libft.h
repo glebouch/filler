@@ -95,5 +95,6 @@ void			ft_putnstr_fd(char const *s, int n, int fd);
 long long		ft_imaxabs(long long n);
 long long int	ft_power(int i, int j);
 void			ft_putll(long long n);
+int		get_next_line2(int const fd, char **line);
 
 #endif
