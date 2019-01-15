@@ -16,7 +16,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 
 typedef struct	s_info
 {

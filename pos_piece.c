@@ -56,9 +56,11 @@ int		ft_init_tab_piece(t_info *t)
 		i++;
 	}
 	i = 0;
-	t->tab_piece = (int **)malloc(sizeof(int *) * t->nbr_pts);
+	if (!(t->tab_piece = (int **)malloc(sizeof(int *) * t->nbr_pts)))
+		return (0);
 	while (i < t->nbr_pts)
-		t->tab_piece[i++] = (int *)malloc(sizeof(int) * 2);
+		if (!(t->tab_piece[i++] = (int *)malloc(sizeof(int) * 2)))
+			return (0);
 	ft_fill_tab_piece(t);
 	return (t->nbr_pts);
 }
@@ -124,8 +126,8 @@ int		ft_heat_of_point(t_info *t)
 			j = 0;
 			while (j < t->width_map)
 			{
-				if (t->map[i][j] == t->my_letter && \
-					ft_check_if_chaleur_is_around(t, i, j, t->chaleur))
+				if (t->map[i][j] == t->my_letter
+					&& ft_check_if_chaleur_is_around(t, i, j, t->chaleur))
 				{
 					if (ft_try_pos_piece(t, i, j))
 						return (0);

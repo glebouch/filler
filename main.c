@@ -12,13 +12,20 @@
 
 #include "filler.h"
 
+void	ft_tpiece_to_null(t_info *t)
+{
+	int i;
+
+	i = 0;
+	while (i < t->height_piece)
+		t->piece[i++] = NULL;
+}
+
 int		ft_parse_piece(t_info *t)
 {
 	char	*line;
 	char	**tmp;
-	int		i;
 
-	i = 0;
 	get_next_line(0, &line);
 	tmp = ft_strsplit(line, ' ');
 	t->height_piece = (tmp[1]) ? ft_atoi(tmp[1]) : 0;
@@ -32,11 +39,13 @@ int		ft_parse_piece(t_info *t)
 	}
 	if (!(t->piece = (char **)malloc(sizeof(char *) * (t->height_piece + 1))))
 		return (0);
-	while (i < t->height_piece)
-		t->piece[i++] = NULL;
+	ft_tpiece_to_null(t);
 	if (!ft_parse_piece2(t))
+	{
+		while (get_next_line(0, &line) > 0)
+			free(line);
 		return (0);
-	ft_init_tab_piece(t);
+	}
 	return (1);
 }
 
@@ -60,7 +69,11 @@ int		ft_parse_map(t_info *t)
 	get_next_line(0, &line);
 	free(line);
 	if (!ft_parse_map2(t))
+	{
+		while (get_next_line(0, &line) > 0)
+			free(line);
 		return (0);
+	}
 	return (1);
 }
 
@@ -70,13 +83,19 @@ int		ft_infos(t_info *t)
 	char	*name;
 
 	get_next_line(0, &line);
-	name = ft_strstr(line, "glebouch.filler");
+	if (!line)
+		return (0);
+	name = (line) ? ft_strstr(line, "glebouch.filler") : NULL;
 	t->num_player = (line[10]) ? ft_atoi(&line[10]) : 0;
 	t->my_letter = (t->num_player == 1) ? 'O' : 'X';
 	t->adv_letter = (t->my_letter == 'X') ? 'O' : 'X';
 	free(line);
 	if (!t->num_player || !name)
+	{
+		while (get_next_line(0, &line) > 0)
+			free(line);
 		return (0);
+	}
 	return (1);
 }
 
@@ -92,6 +111,8 @@ int		main(void)
 		t.i_ret = 0;
 		t.j_ret = 0;
 		if (!ft_parse_map(&t) || !ft_parse_piece(&t))
+			return (0);
+		if (!ft_init_tab_piece(&t))
 			return (0);
 		ft_heat(&t);
 		t.end = ft_heat_of_point(&t);
