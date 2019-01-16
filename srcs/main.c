@@ -70,8 +70,7 @@ int		ft_parse_map(t_info *t)
 	free(line);
 	if (!ft_parse_map2(t))
 	{
-		while (get_next_line(0, &line) > 0)
-			free(line);
+		get_next_line(0, NULL);
 		return (0);
 	}
 	return (1);
@@ -85,15 +84,14 @@ int		ft_infos(t_info *t)
 	get_next_line(0, &line);
 	if (!line)
 		return (0);
-	name = (line) ? ft_strstr(line, "glebouch.filler") : NULL;
-	t->num_player = (line[10]) ? ft_atoi(&line[10]) : 0;
+	name = ft_strstr(line, "glebouch.filler");
+	t->num_player = (ft_strlen(line) > 10) ? ft_atoi(&line[10]) : 0;
 	t->my_letter = (t->num_player == 1) ? 'O' : 'X';
 	t->adv_letter = (t->my_letter == 'X') ? 'O' : 'X';
 	free(line);
 	if (!t->num_player || !name)
 	{
-		while (get_next_line(0, &line) > 0)
-			free(line);
+		get_next_line(0, NULL);
 		return (0);
 	}
 	return (1);
@@ -120,8 +118,7 @@ int		main(void)
 		ft_putchar(' ');
 		ft_putnbr_fd(t.j_ret, 1);
 		ft_putchar('\n');
-		ft_free_all(&t);
-		if (t.end)
+		if (!ft_free_all(&t))
 			return (0);
 	}
 	return (0);

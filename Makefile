@@ -2,7 +2,13 @@ NAME = glebouch.filler
 
 INCLUDES = includes
 
-SRC = main.c heat_map.c pos_piece.c frees.c utils_pos_piece.c utils_heat_map.c parsing.c
+SRC = 	srcs/main.c \
+		srcs/heat_map.c \
+		srcs/pos_piece.c \
+		srcs/frees.c \
+		srcs/utils_pos_piece.c \
+		srcs/utils_heat_map.c \
+		srcs/parsing.c
 
 LIB = ./libft/libft.a
 
@@ -25,7 +31,7 @@ mlib :
 
 clean :
 	@make clean -C ./libft/
-	@rm $(OBJ)
+	@rm -f $(OBJ)
 	
 fclean : clean
 	@make fclean -C ./libft/

@@ -55,11 +55,11 @@ static int		ft_taboulet(char **stat, char **line)
 	return (0);
 }
 
-int				ft_check(int fd, char **line, char *stat)
+int				ft_check(int fd, char **line, char **stat)
 {
-	if (fd == 0 && !line)
+	if (!line)
 	{
-		free(stat);
+		ft_strdel(stat);
 		return (-1);
 	}
 	if (fd < 0 || !line)
@@ -71,9 +71,9 @@ int				get_next_line(int fd, char **line)
 {
 	int			i;
 	char		buffer[BUFF_SIZE + 1];
-	static char	*stat;
+	static char	*stat = NULL;
 
-	if (ft_check(fd, line, stat) == -1)
+	if (ft_check(fd, line, &stat) == -1)
 		return (-1);
 	*line = NULL;
 	if (ft_taboulet(&stat, line) == 1)

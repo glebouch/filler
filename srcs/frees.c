@@ -37,10 +37,13 @@ void	ft_free_tab_int(int **tab, int height)
 	free(tab);
 }
 
-void	ft_free_all(t_info *t)
+int		ft_free_all(t_info *t)
 {
 	ft_free_tab_char(t->map);
 	ft_free_tab_char(t->piece);
 	ft_free_tab_int(t->tab_piece, t->nbr_pts);
 	ft_free_tab_int(t->heat_map, t->height_map);
+	if (t->end)
+		get_next_line(0, NULL);
+	return (!t->end);
 }

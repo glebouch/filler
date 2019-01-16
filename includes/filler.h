@@ -13,14 +13,10 @@
 #ifndef FILLER_H
 # define FILLER_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include "../libft/includes/libft.h"
 
 typedef struct	s_info
 {
-	int		fd;
 	int		num_player;
 	int		width_map;
 	int		height_map;
@@ -60,7 +56,7 @@ int				ft_check_if_chaleur_is_around(t_info *t, int i, int j, int ch);
 void			ft_heat(t_info *t);
 void			ft_init_heat_map(t_info *t, int *chaleur, int *next, int *zero);
 int				ft_heat_of_point(t_info *t);
-void			ft_free_all(t_info *t);
+int				ft_free_all(t_info *t);
 void			ft_put_heat_map(t_info *t);
 int				ft_init_tab_piece(t_info *t);
 void			ft_put_tab_piece(t_info *t);
